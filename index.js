@@ -85,8 +85,6 @@ restService.post('/echo', function(req, res) {
             var parrotText = echo + '. ' + echo;
     }
 
-    // var parrotText = "i love beer" ? "I love beer to buddy" : echo + ' ' + echo;
-    //
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? parrotText : "Seems like some problem. Speak again."
     return res.json({
         speech: speech,
