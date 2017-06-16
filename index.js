@@ -18,7 +18,7 @@ restService.post('/echo', function(req, res) {
 
     switch(echo.toLowerCase()){
         case "i love beer":
-            var parrotText = "I love beer to buddy, please get me some!";
+            var parrotText = "I love beer to Arno, please get me some!";
             break;
 
         case "i am stupid":
