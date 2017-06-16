@@ -52,16 +52,14 @@ var options = {
 };
 
 // Start the request
-function getTracking(){
-    restService.get(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            // Print out the response body
-            console.log(body)
-        }
-        return response.body.result.parameter.description
-    });
-};
 
+/*restService.get(options, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        // Print out the response body
+        console.log(body)
+    }
+    return response.body.result.parameter.description
+});*/
 
 
 
@@ -79,7 +77,13 @@ restService.post('/echo', function(req, res) {
             var parrotText = "I am not stupid. Don't try to fool me!";
             break;
         case "hermes parcel":
-            var parrotText = getTracking();
+            restService.get(options, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    // Print out the response body
+                    console.log(body)
+                }
+                var parrotText = response.body.result.parameter.description;
+            });
             
 
         default:
