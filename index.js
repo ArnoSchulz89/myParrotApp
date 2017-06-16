@@ -15,9 +15,9 @@ restService.use(bodyParser.json());
 
 
 
-// Set the headers
+/*// Set the headers
 var headers = [
-    {"Accept" : "*/*"},
+    {"Accept" : "* / *"},
 
     {"Accept-Encoding" : "gzip"},
 
@@ -49,7 +49,7 @@ var options = {
     'barcode': '0000000000000019',
     //'apikey' : 'Mo9ILZ1MFroWqdyNQ9O82xxRr4s6pUul'
     'headers' : headers
-};
+};*/
 
 // Start the request
 
@@ -76,7 +76,7 @@ restService.post('/echo', function(req, res) {
         case "i am stupid":
             var parrotText = "I am not stupid. Don't try to fool me!";
             break;
-            
+
         case "where is my parcel":
             var parrotText = "I have no clue.";
             break;
