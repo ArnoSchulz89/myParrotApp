@@ -15,7 +15,20 @@ restService.post('/echo', function(req, res) {
     //do something with the echoText parameter.
     var echo = req.body.result.parameters.echoText;
 
-    var parrotText = "i love beer" ? "I love beer to buddy" : echo + ' ' + echo;
+    switch(toLowerCase(echo)){
+        case "i love beer":
+            var parrotText = "I love beer to buddy, please get me some!";
+            break;
+
+        case "i am stupid":
+            var parrotText = "Yes, you are really stupid";
+            break;
+
+        default:
+            var parrotText = echo + ' ' + echo;
+    }
+
+    // var parrotText = "i love beer" ? "I love beer to buddy" : echo + ' ' + echo;
     //
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? parrotText : "Seems like some problem. Speak again."
     return res.json({
