@@ -49,7 +49,7 @@ var options = {
     'barcode': '0000000000000019',
     //'apikey' : 'Mo9ILZ1MFroWqdyNQ9O82xxRr4s6pUul'
     'headers' : headers
-}
+};
 
 // Start the request
 function getTracking(){
