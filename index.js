@@ -76,15 +76,10 @@ restService.post('/echo', function(req, res) {
         case "i am stupid":
             var parrotText = "I am not stupid. Don't try to fool me!";
             break;
-        case "hermes parcel":
-            restService.get(options, function (error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    // Print out the response body
-                    console.log(body)
-                }
-                var parrotText = response.body.result.parameter.description;
-            });
             
+        case "where is my parcel":
+            var parrotText = "I have no clue.";
+            break;
 
         default:
             var parrotText = echo + '. ' + echo;
