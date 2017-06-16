@@ -14,7 +14,7 @@ restService.use(bodyParser.json());
 restService.post('/echo', function(req, res) {
     //just a testcode
     var echo = req.body.result.parameters.echoText;
-    var parrotText = echo + ' ' + echo + ' ' + echo + ' ' + echo;
+    var parrotText = echo + ' ' + echo;
     //
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? parrotText : "Seems like some problem. Speak again."
     return res.json({
@@ -24,7 +24,7 @@ restService.post('/echo', function(req, res) {
     });
 });
 
-restService.post('/slack-test', function(req, res) {
+/*restService.post('/slack-test', function(req, res) {
 
     var slack_message = {
         "text": "Details of JIRA board for Browse and Commerce",
@@ -77,7 +77,7 @@ restService.post('/slack-test', function(req, res) {
         }
     });
 });
-
+*/
 
 
 
