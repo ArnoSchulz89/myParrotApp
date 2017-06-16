@@ -26,7 +26,7 @@ restService.post('/echo', function(req, res) {
             break;
 
         default:
-            var parrotText = echo + ' ' + echo;
+            var parrotText = echo + '. ' + echo;
     }
 
     // var parrotText = "i love beer" ? "I love beer to buddy" : echo + ' ' + echo;
