@@ -14,7 +14,7 @@ restService.use(bodyParser.json());
 restService.post('/echo', function(req, res) {
     //do something with the echoText parameter.
     var str = req.body.result.parameters.echoText;
-    var echo = toLowerCase(str);
+    var echo = str.toLowerCase();
 
     switch(echo){
         case "i love beer":
