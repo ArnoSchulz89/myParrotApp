@@ -53,6 +53,7 @@ function myCb(error, response, body) {
     if (!error && response.statusCode == 200) {
         var latest = JSON.parse(body)[0];
         console.log(latest.point.description);
+        return latest.point.description;
     }
 };
 
@@ -60,17 +61,17 @@ function myCb(error, response, body) {
 restService.post('/echo', function(req, res) {
     var googleReq = req.body.result.parameters.echoText;
 
-    tracking.getTracking(googleReq, function(myCb){
-        var hermesRes = res.end(myCb);
+    var hermesRes = tracking.getTracking(googleReq, myCb);
+
+    if(hermesRes){
         var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "Seems like some problem. Speak again."
         return res.json({
-        speech: speech,
-        displayText: speech,
-        source: 'ArnosAPI'
+            speech: speech,
+            displayText: speech,
+            source: 'ArnosAPI'
         });
 
-    });
-  
+    }
 
 });
 
