@@ -61,8 +61,9 @@ function myCb(error, response, body) {
 restService.post('/echo', function(req, res) {
     var googleReq = req.body.result.parameters.echoText;
 
-    var hermesRes = tracking.getTracking(googleReq, myCb);
-    console.log(hermesRes + ' is saved du var hermesRes');
+    var hermesRes = res.tracking.getTracking(googleReq, myCb);
+    res.end();
+    console.log(hermesRes + ' is saved to var hermesRes');
 
     if(hermesRes != ''){
         var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "Seems like some problem. Speak again."
@@ -71,7 +72,6 @@ restService.post('/echo', function(req, res) {
             displayText: speech,
             source: 'ArnosAPI'
         });
-    res.end();
     }
 
 });
