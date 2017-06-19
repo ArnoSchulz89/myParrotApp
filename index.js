@@ -14,17 +14,6 @@ restService.use(bodyParser.json());
 
 
 
-var options = {
-  host: 'hermestest-dev.apigee.net',
-  path: '/tracking/devportal/events',
-  port: '443',
-  headers: {'test': 'placeholderblabla'}
-
-var tracking = restService.get(){
-
-};
-
-
 
 restService.post('/echo', function(req, res) {
     //do something with the echoText parameter.
