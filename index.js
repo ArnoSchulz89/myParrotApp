@@ -53,19 +53,18 @@ function myCb(error, response, body) {
     if (!error && response.statusCode == 200) {
         var latest = JSON.parse(body)[0];
         console.log(latest.point.description);
-        return latest.point.description;
     }
 };
 
 
 restService.post('/echo', function(req, res) {
     var googleReq = req.body.result.parameters.echoText;
+    console.log(googleReq);
 
-    var hermesRes = res.tracking.getTracking(googleReq, myCb);
-    res.end();
-    console.log(hermesRes + ' is saved to var hermesRes');
+    var hermesRes = tracking.getTracking(googleReq, myCb);
 
-    if(hermesRes != ''){
+
+    if(hermesRes){
         var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "Seems like some problem. Speak again."
         return res.json({
             speech: speech,
