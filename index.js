@@ -20,7 +20,7 @@ restService.use(bodyParser.json());
 /*function googleRequest(){
     restService.post('/echo', function(req, res) {
         //do something with the echoText parameter.
-        var googleText = req.body.result.parameters.echoText;
+        googleText = req.body.result.parameters.echoText;
 
         switch(echo.toLowerCase()){
             case "i love beer":
@@ -67,7 +67,7 @@ restService.post('/echo', function(req, res) {
         speech: speech,
         displayText: speech,
         source: 'ArnosAPI'
-
+    }
 };
 
 
