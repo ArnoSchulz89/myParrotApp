@@ -19,7 +19,7 @@ restService.post('/echo', function(req, res) {
     //do something with the echoText parameter.
     var googleText = req.body.result.parameters.echoText;
 
-    switch(echo.toLowerCase()){
+    switch(googleText.toLowerCase()){
         case "i love beer":
             var parrotText = "I love beer to Arno, please get me some!";
             break;
