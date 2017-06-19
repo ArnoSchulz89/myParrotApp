@@ -65,7 +65,7 @@ restService.post('/echo', function(req, res) {
         if (!error && response.statusCode == 200) {
             var latest = JSON.parse(body)[0];
             console.log(latest.point.description + ' is the state of your parcel');
-            var hermesRes = latest.point.description;
+            var hermesRes = 0000000000000010; //latest.point.description;
 
             if(hermesRes != ''){
                 var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "Seems like some problem. Speak again."
@@ -76,12 +76,8 @@ restService.post('/echo', function(req, res) {
                 });
             } 
         }
-
          
     });
-
-
-
 
 });
 
