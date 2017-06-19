@@ -2,6 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+//const tracking = require('./lib/tracking');
 
 const restService = express();
 
@@ -11,16 +12,51 @@ restService.use(bodyParser.urlencoded({
 
 restService.use(bodyParser.json());
 
+
+
+
 restService.post('/echo', function(req, res) {
-    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
+    //do something with the echoText parameter.
+    var echo = req.body.result.parameters.echoText;
+
+    switch(echo.toLowerCase()){
+        case "i love beer":
+            var parrotText = "I love beer to Arno, please get me some!";
+            break;
+
+        case "i am stupid":
+            var parrotText = "I am not stupid. Don't try to fool me!";
+            break;
+
+        case "where is my parcel":
+            var parrotText = "I have no clue.";
+            break;
+
+        default:
+            var parrotText = echo + '. ' + echo;
+    }
+
+    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.parrotText : "Seems like some problem. Speak again.";
     return res.json({
         speech: speech,
         displayText: speech,
-        source: 'webhook-echo-sample'
+        source: 'myParrotAPI'
     });
 });
 
-restService.post('/slack-test', function(req, res) {
+
+
+/*function myCb(error, response, body) {
+    if (!error && response.statusCode == 200) {
+        var latest = JSON.parse(body)[0];
+        console.log(latest.point.description);
+    }
+};
+*/
+//tracking.getTracking('0000000000000010', myCb);
+
+
+/*restService.post('/slack-test', function(req, res) {
 
     var slack_message = {
         "text": "Details of JIRA board for Browse and Commerce",
@@ -72,7 +108,7 @@ restService.post('/slack-test', function(req, res) {
             "slack": slack_message
         }
     });
-});
+});*/
 
 
 
