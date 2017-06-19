@@ -61,8 +61,8 @@ restService.post('/echo', function(req, res) {
     var googleReq = req.body.result.parameters.echoText;
 
     tracking.getTracking(googleReq, function(myCb){
-        res.end(myCb);
-        var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? myCb : "Seems like some problem. Speak again."
+        var hermesRes = res.end(myCb);
+        var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "Seems like some problem. Speak again."
         return res.json({
         speech: speech,
         displayText: speech,
