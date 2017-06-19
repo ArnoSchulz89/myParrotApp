@@ -60,16 +60,16 @@ function myCb(error, response, body) {
 restService.post('/echo', function(req, res) {
     var googleReq = req.body.result.parameters.echoText;
 
-    var hermesRes = tracking.getTracking(googleReq, myCb);
-
-    if(hermesRes){
-        var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "Seems like some problem. Speak again."
+    tracking.getTracking(googleReq, function(myCb){
+        res.end(myCb);
+        var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? myCb : "Seems like some problem. Speak again."
         return res.json({
         speech: speech,
         displayText: speech,
         source: 'ArnosAPI'
         });
-    }
+
+    });
   
 
 });
