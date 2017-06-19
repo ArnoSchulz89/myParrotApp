@@ -67,8 +67,8 @@ restService.post('/echo', function(req, res) {
         speech: speech,
         displayText: speech,
         source: 'ArnosAPI'
-    }
-};
+   });
+});
 
 
 
