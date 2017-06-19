@@ -52,7 +52,7 @@ restService.use(bodyParser.json());
 function myCb(error, response, body) {
     if (!error && response.statusCode == 200) {
         var latest = JSON.parse(body)[0];
-        console.log(latest.point.description);
+        console.log(latest.point.description + ' is the state of your parcel');
     }
 };
 
@@ -61,17 +61,25 @@ restService.post('/echo', function(req, res) {
     var googleReq = req.body.result.parameters.echoText;
     console.log(googleReq);
 
-    var hermesRes = tracking.getTracking(googleReq, myCb);
+    tracking.getTracking(googleReq, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var latest = JSON.parse(body)[0];
+            console.log(latest.point.description + ' is the state of your parcel');
+            hermesRes = latest.point.description;
+        }
+
+        if(hermesRes){
+            var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "Seems like some problem. Speak again."
+            return res.json({
+                speech: speech,
+                displayText: speech,
+                source: 'ArnosAPI'
+            });
+        }  
+    });
 
 
-    if(hermesRes){
-        var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "Seems like some problem. Speak again."
-        return res.json({
-            speech: speech,
-            displayText: speech,
-            source: 'ArnosAPI'
-        });
-    }
+ 
 
 });
 
