@@ -38,7 +38,7 @@ restService.use(bodyParser.json());
                 var parrotText = googleText + '. ' + googleText;
         }
 
-        var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.parrotText : "Seems like some problem. Speak again."
+        var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? parrotText : "Seems like some problem. Speak again."
         return res.json({
             speech: speech,
             displayText: speech,
@@ -47,6 +47,7 @@ restService.use(bodyParser.json());
     });
 };
 */
+var hermesRes="init placeholder";
 
 
 function myCb(error, response, body) {
@@ -59,14 +60,21 @@ function myCb(error, response, body) {
 
 restService.post('/echo', function(req, res) {
     var googleReq = req.body.result.parameters.echoText;
-    var hermesRes = tracking.getTracking(googleReq, myCb);
 
-    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "Seems like some problem. Speak again."
-    return res.json({
+    res.on('data', function(barcode, callback){
+        hermesRes = tracking.getTracking(googleReq, myCb);
+    });
+
+    res.on('end', function(){
+        var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "Seems like some problem. Speak again."
+        return res.json({
         speech: speech,
         displayText: speech,
         source: 'ArnosAPI'
-   });
+        });
+    });    
+
+    
 });
 
 
