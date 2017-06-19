@@ -62,15 +62,16 @@ restService.post('/echo', function(req, res) {
     var googleReq = req.body.result.parameters.echoText;
 
     var hermesRes = tracking.getTracking(googleReq, myCb);
+    console.log(hermesRes + ' is saved du var hermesRes');
 
-    if(hermesRes){
+    if(hermesRes != ''){
         var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "Seems like some problem. Speak again."
         return res.json({
             speech: speech,
             displayText: speech,
             source: 'ArnosAPI'
         });
-
+    res.end();
     }
 
 });
