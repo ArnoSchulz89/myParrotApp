@@ -14,10 +14,6 @@ restService.use(bodyParser.json());
 
 //var googleText = 'placeholder';
 
-var tracking = restService.get(){
-
-};
-
 
 /*function googleRequest(){
     restService.post('/echo', function(req, res) {
@@ -68,7 +64,7 @@ restService.post('/echo', function(req, res) {
         return res.json({
             speech: speech,
             displayText: speech,
-            source: 'myParrotAPI'
+            source: 'ArnosAPI'
 
 };
 
