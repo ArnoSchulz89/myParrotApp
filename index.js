@@ -47,7 +47,6 @@ restService.use(bodyParser.json());
     });
 };
 */
-var hermesRes="init placeholder";
 
 
 function myCb(error, response, body) {
@@ -61,20 +60,18 @@ function myCb(error, response, body) {
 restService.post('/echo', function(req, res) {
     var googleReq = req.body.result.parameters.echoText;
 
-    res.on('data', function(barcode, callback){
-        hermesRes = tracking.getTracking(googleReq, myCb);
-    });
+    var hermesRes = tracking.getTracking(googleReq, myCb);
 
-    res.on('end', function(){
+    if(hermesRes){
         var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "Seems like some problem. Speak again."
         return res.json({
         speech: speech,
         displayText: speech,
         source: 'ArnosAPI'
         });
-    });    
+    }
+  
 
-    
 });
 
 
