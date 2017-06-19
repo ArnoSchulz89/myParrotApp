@@ -2,7 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const tracking = require('./lib/tracking');
+//const tracking = require('./lib/tracking');
 
 const restService = express();
 
@@ -46,14 +46,14 @@ restService.post('/echo', function(req, res) {
 
 
 
-function myCb(error, response, body) {
+/*function myCb(error, response, body) {
     if (!error && response.statusCode == 200) {
         var latest = JSON.parse(body)[0];
         console.log(latest.point.description);
     }
 };
-
-tracking.getTracking('0000000000000010', myCb);
+*/
+//tracking.getTracking('0000000000000010', myCb);
 
 
 /*restService.post('/slack-test', function(req, res) {
