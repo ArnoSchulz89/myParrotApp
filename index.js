@@ -12,11 +12,21 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 
-function myCb(error, response, body) {
-    if (!error && response.statusCode <= 200) {
-        var latest = JSON.parse(body)[0];
-        console.log(latest.point.description + ' is the state of your parcel');
-    }else{
+function myCb2 (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var latest = JSON.parse(body)[0];
+            console.log(latest.point.description + ' is the state of your parcel');
+            var hermesRes = 'let me have a look ... your Hermes parcel is: ' + latest.point.description;
+
+            if(hermesRes != ''){
+                var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "I didn't get it rigth, please Speak again."
+                return res.json({
+                    speech: speech,
+                    displayText: speech,
+                    source: 'gHomeHermesTrackingAPI'
+                });
+            }
+        }else{
         switch (response.statusCode){
             case 400:
                 console.log('bad request error code with an empty payload');
@@ -39,36 +49,15 @@ function myCb(error, response, body) {
                 break;
         }
     }
-};
+         
+    }
 
 
 restService.post('/echo', function(req, res) {
     var googleReq = req.body.result.parameters.echoText;
     //console.log(googleReq);
 
-    tracking.getTracking(googleReq, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var latest = JSON.parse(body)[0];
-            console.log(latest.point.description + ' is the state of your parcel');
-            var hermesRes = 'let me have a look ... your Hermes parcel is: ' + latest.point.description;
-
-            if(hermesRes != ''){
-                var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? hermesRes : "I didn't get it rigth, please Speak again."
-                return res.json({
-                    speech: speech,
-                    displayText: speech,
-                    source: 'gHomeHermesTrackingAPI'
-                });
-            }else{
-                return res.json({
-                    speech: speech,
-                    displayText: speech,
-                    sourche: 'gHomeHermesTrackingAPI'
-                });
-            }
-        }
-         
-    });
+    tracking.getTracking(googleReq, myCb2);
 
 });
 
