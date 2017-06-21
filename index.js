@@ -14,9 +14,9 @@ restService.use(bodyParser.json());
 
 
 restService.post('/echo', function(req, res) {
-    var googleReq = req.body.result.parameters.echoText;
+    var googleReq = req.body.result.parameters.echoText.trim();
 
-    var hermesRes = tracking.getTracking(googleReq.trim(), function (error, response, body) {
+    var hermesRes = tracking.getTracking(googleReq, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var latest = JSON.parse(body)[0];
             console.log(latest.point.description + ' is the state of your parcel');
