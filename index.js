@@ -33,9 +33,10 @@ function myCb2 (error, response, body, req) {
 
 restService.post('/echo', function(req, res) {
     var googleReq = req.body.result.parameters.echoText;
+    var req = req;
     //console.log(googleReq);
 
-    tracking.getTracking(googleReq, myCb2(this.req));
+    tracking.getTracking(googleReq, myCb2(error, response, body, req));
 
 });
 
