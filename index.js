@@ -14,7 +14,7 @@ restService.use(bodyParser.json());
 
 
 restService.post('/echo', function(req, res) {
-    var googleReq = req.body.result.parameters.echoText;
+    var googleReq = req.body.result.parameters.echoText.replace(/[^0-9.]/g, "");
     console.log(googleReq);
 
     var hermesRes = tracking.getTracking(googleReq, function (error, response, body) {
