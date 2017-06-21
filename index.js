@@ -26,29 +26,7 @@ function myCb2 (error, response, body) {
                     source: 'gHomeHermesTrackingAPI'
                 });
             }
-        }else{
-        switch (response.statusCode){
-            case 400:
-                console.log('bad request error code with an empty payload');
-                break;
-
-            case 401:
-                console.log('unauthorized user');
-                break;
-
-            case 404:
-                console.log('no parcel found for the supplied barcode. Returns an empty payload');
-                break;
-
-            case 429:
-                console.log('too many requests');
-                break;
-
-            case 500:
-                console.log('internal Server Error');
-                break;
         }
-    }
          
     }
 
