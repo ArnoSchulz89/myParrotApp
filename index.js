@@ -44,7 +44,7 @@ restService.post('/echo', function(req, res) {
             }
         }
          
-    }
+    });
 
 });
 
