@@ -14,7 +14,7 @@ restService.use(bodyParser.json());
 
 
 restService.post('/echo', function(req, res) {
-    var googleReq = req.body.result.parameters.echoText;
+    var googleReq = req.body.result.parameters.echoText.trim();
 
     var hermesRes = tracking.getTracking(googleReq, function (error, response, body) {
         if (!error && response.statusCode == 200) {
