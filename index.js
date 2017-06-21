@@ -57,7 +57,7 @@ restService.post('/echo', function(req, res) {
     var googleReq = req.body.result.parameters.echoText;
     //console.log(googleReq);
 
-    tracking.getTracking(googleReq, myCb2);
+    tracking.getTracking(googleReq, myCb2(req));
 
 });
 
